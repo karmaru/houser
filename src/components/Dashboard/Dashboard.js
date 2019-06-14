@@ -47,7 +47,7 @@ render() {
       <div>
           Home Listings
       </div>
-      <div style = {{width: '75vw', display: 'flex', flexDirection: 'column', height: 'auto', margin: '5px', borderRadius: '10px'}}>
+      <div style = {{ display: 'flex', flexDirection: 'column', height: 'auto', margin: '5px', borderRadius: '10px', alignItems: 'center'}}>
         {this.state.houses.map(house => {
             return (
                 <div style={{backgroundColor: '#E5F4EC'}} key={house.id}>
