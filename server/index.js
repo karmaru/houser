@@ -1,42 +1,32 @@
-require("dotenv").config();
-const express = require("express");
-const session = require("express-session");
-const massive = require("massive");
+// this is the server side version of import
+const express = require('express')
+// this allows connection to database
+const massive = require('massive')
 
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
-const authCtrl = require("./controller");
+// allows the use of .env
+require('dotenv').config()
 
-const app = express();
+const houseCtrl = require('./controller')
 
-// MIDDLEWARE
+// invokes express
+const app = express()
 
-app.use(express.json());
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1501850180
-    }
-  })
-);
+app.use(express.json())
 
+let {SERVER_PORT, CONNECTION_STRING} = process.env
+
+// this connects to the db with a Promise...
 massive(CONNECTION_STRING).then(db => {
-  app.set("db", db);
+    console.log('db is connected')
+    // console.log(1111, db)
+    app.set('db', db)
+})
 
-  console.log("Connected to db...");
-});
+app.get('/api/houses', houseCtrl.read)
+app.post('/api/houses', houseCtrl.create)
+app.delete('/api/houses/:id', houseCtrl.delete);
+// app.put('/api/national_parks/:id', NPC.update)
+// app.delete('/api/national_parks/:id', NPC.delete)
 
-// AUTH ENDPOINTS
-
-// app.post("/auth/register", authCtrl.register);
-
-// app.post("/auth/login", authCtrl.login);
-
-// app.get("/auth/current", authCtrl.current);
-
-// app.post("/auth/logout", authCtrl.logout);
-
-app.listen(SERVER_PORT, () => console.log(`This mother be up on port ${SERVER_PORT}`));
+app.listen(SERVER_PORT, () => console.log('listening on port', SERVER_PORT))

@@ -11,8 +11,8 @@ class Header extends Component {
 
 render() {
     return (
-      <div>
-          Header
+      <div style = {{width: '100vw', height: '8vh', backgroundColor: '#519872', color: 'white', fontSize: '25px', alignItems: 'center'}}>
+          Houser
       </div>
     );
     }  
