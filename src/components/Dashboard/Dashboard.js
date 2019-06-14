@@ -35,7 +35,7 @@ render() {
     
     return (  
       <div>  
-      <div style = {{backgroundColor: '#AFD4C0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '10px 300px', width: '75vw'}}>
+      <div style = {{backgroundColor: '#AFD4C0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '10px 300px', width: 'auto'}}>
           Dashboard
           <Link to = '/wizard'>
           <button>
